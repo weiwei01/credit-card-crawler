@@ -14,7 +14,7 @@ class MyDBTest():
 	def __init__(self):
 
 		try:
-			self.con = psycopg2.connect(database="patentdb", user="admin", password="admin", host="140.116.96.199", port="5432")
+			self.con = psycopg2.connect(database="creditcarddb", user="admin", password="admin", host="140.116.96.199", port="5432")
 
 			#self.con = pymysql.connect("192.168.46.1","admin","admin","amazon_review_db" )
 			#self.con = pymysql.connect("140.116.96.199","admin","admin","amazon_review_db" )

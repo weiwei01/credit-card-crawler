@@ -26,7 +26,7 @@ def crawlPageHtml(url):
 	#browser.close()
 
 	driver = webdriver.Remote(
-		command_executor='http://140.116.96.199:4444/wd/hub',
+		command_executor='http://127.0.0.1:4444/wd/hub',
 		 desired_capabilities=DesiredCapabilities.CHROME
 	)
 	driver.get(url)
@@ -174,17 +174,20 @@ def parseSummary(html):
 
 
 	return parsed_soup
-def storeToDatabase(patentId, url, html):
+def storeToDatabase(company, category, url, html):
 	db = pydbfunction.MyDBTest()
 	dataList = []
-	dataList.append(patentId)
+	dataList.append(company)
+	dataList.append(category)
 	dataList.append(url)
 	dataList.append(html)
-	insertSql = "INSERT INTO patent_html(id, url, html) VALUES (%s, %s, %s)"
+	insertSql = '''INSERT INTO promotion_table
+					(company, category, url, html) 
+					VALUES (%s, %s, %s, %s)'''
 	db.insertData(insertSql, dataList)
 def main(company, category, url):
 	html = crawlPageHtml(url)
-	pprint(html)
+	#pprint(html)
 	#patentDict = parseToTree(html)
 	#pprint(patentDict)
 	#tree = makeTree(patentDict)
@@ -193,7 +196,7 @@ def main(company, category, url):
 	#summary = parseSummary(html)
 	#claims = parseClaims(html)
 	#pprint(claims.text)
-	#storeToDatabase(patentId, url, html)
+	storeToDatabase(company, category, url, html)
 	#print((patentClaims))
 	
 def readFile(name):
@@ -207,4 +210,5 @@ from argparse import ArgumentParser
 
 if __name__ == '__main__':
 	online_shopping_url = "https://www.esunbank.com.tw/bank/personal/credit-card/discount/shops/onlineshop"
+	online_shopping_url = "https://www.esunbank.com.tw/bank/personal/credit-card/discount/shops/onlineshop?f=&pageNum=2"
 	main("esun", "online_shopping", online_shopping_url)
