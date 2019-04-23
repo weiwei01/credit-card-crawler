@@ -4,6 +4,12 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
+selenium = "*"
+bs4 = "*"
+lxml = "*"
+treelib = "*"
+psycopg2 = "*"
+psycopg2-binary = "*"
 
 [dev-packages]
 

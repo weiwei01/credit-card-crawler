@@ -2,7 +2,6 @@ from pprint import pprint
 import selenium
 from bs4 import BeautifulSoup
 import time
-from pyquery import PyQuery as pq
 from lxml import etree
 from treelib import Node, Tree
 from selenium import webdriver
@@ -27,7 +26,7 @@ def crawlPageHtml(url):
 	#browser.close()
 
 	driver = webdriver.Remote(
-		command_executor='http://127.0.0.1:4444/wd/hub',
+		command_executor='http://140.116.96.199:4444/wd/hub',
 		 desired_capabilities=DesiredCapabilities.CHROME
 	)
 	driver.get(url)
@@ -183,9 +182,9 @@ def storeToDatabase(patentId, url, html):
 	dataList.append(html)
 	insertSql = "INSERT INTO patent_html(id, url, html) VALUES (%s, %s, %s)"
 	db.insertData(insertSql, dataList)
-def main(patentId):
-	url = 	"https://patents.google.com/patent/"+ patentId
+def main(company, category, url):
 	html = crawlPageHtml(url)
+	pprint(html)
 	#patentDict = parseToTree(html)
 	#pprint(patentDict)
 	#tree = makeTree(patentDict)
@@ -194,7 +193,7 @@ def main(patentId):
 	#summary = parseSummary(html)
 	#claims = parseClaims(html)
 	#pprint(claims.text)
-	storeToDatabase(patentId, url, html)
+	#storeToDatabase(patentId, url, html)
 	#print((patentClaims))
 	
 def readFile(name):
@@ -206,30 +205,6 @@ def readFile(name):
 	return output
 from argparse import ArgumentParser
 
-if __name__ == '__main__': 
-	#parser = ArgumentParser()
-	#parser.add_argument("-q", "--optional-arg", 
-	#	help="optional argument", dest="opt", default="US9731707")	
-	#args = parser.parse_args()
-	#print("Patent ID:", args.opt)
-	
-	#main(args.opt) 
-	#main("US9434270")
-	#main("US9533547")
-	#main("US9601733")
-	#main("US9616770")
-	#main("US9637109")
-	#main("US9656661")
-	#main("US9701213")
-	#main("US9709444")
-	#main("US9728821")
-	#main("US9731707")
-	fileContent = readFile("500 electric vehicle patent.txt")
-	fileList = fileContent.split("\n")
-	#pprint(fileList)
-	for fileName in fileList:
-		newFileName = fileName.replace("-","")
-		newFileName = newFileName.replace("B1","")
-		newFileName = newFileName.replace("B2","")
-		print(newFileName)
-		main(newFileName)
+if __name__ == '__main__':
+	online_shopping_url = "https://www.esunbank.com.tw/bank/personal/credit-card/discount/shops/onlineshop"
+	main("esun", "online_shopping", online_shopping_url)
