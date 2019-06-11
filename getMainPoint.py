@@ -8,7 +8,7 @@ from selenium import webdriver
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 import pydbfunction
 globalCompany = "esun"
-globalCategory = "onlineshop"
+globalCategory = "others"
 def writePatentHtmlToFile(fileName, html):
 	file = open(fileName+".txt", 'w')
 	file.write(html)
@@ -89,7 +89,7 @@ def parseHtml(html):
 		pprint(dict)
 		storeMainPointToDatabase(dict)
 def main():
-	selectSql = "select * from promotion_table " #where id = 'US9533547' # limit 500 offset 1
+	selectSql = "select * from promotion_table where category = '{category}' ".format(category=globalCategory) #where id = 'US9533547' # limit 500 offset 1
 	resultList = readDataFromDb(selectSql)
 	for result in resultList:
 		try:

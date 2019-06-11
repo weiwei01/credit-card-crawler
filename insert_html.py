@@ -209,6 +209,16 @@ def readFile(name):
 from argparse import ArgumentParser
 
 if __name__ == '__main__':
-	online_shopping_url = "https://www.esunbank.com.tw/bank/personal/credit-card/discount/shops/onlineshop"
-	online_shopping_url = "https://www.esunbank.com.tw/bank/personal/credit-card/discount/shops/onlineshop?f=&pageNum=2"
-	main("esun", "online_shopping", online_shopping_url)
+	#online_shopping_url = "https://www.esunbank.com.tw/bank/personal/credit-card/discount/shops/onlineshop"
+	#online_shopping_url = "https://www.esunbank.com.tw/bank/personal/credit-card/discount/shops/onlineshop?f=&pageNum=2"
+	#shopping_url = "https://www.esunbank.com.tw/bank/personal/credit-card/discount/shops/deptstore"
+	#shopping_url = "https://www.esunbank.com.tw/bank/personal/credit-card/discount/shops/deptstore?f=&pageNum=2"
+	#shopping_url = "https://www.esunbank.com.tw/bank/personal/credit-card/discount/shops/deptstore?f=&pageNum=3"
+	#communication = "https://www.esunbank.com.tw/bank/personal/credit-card/discount/shops/lifestyle"
+	#main("esun", "housing", communication)
+
+	#exit()
+	
+	for i in range(1,3):
+		traveling_url = "https://www.esunbank.com.tw/bank/personal/credit-card/discount/shops/beauty?f=&pageNum="+str(i)
+		main("esun", "others", traveling_url)
